@@ -1,0 +1,99 @@
+# =============== #
+# Unity generated #
+# =============== #
+Temp/
+Obj/
+UnityGenerated/
+Library/
+obj/
+
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+ExportedObj/
+*.svd
+*.userprefs
+*.csproj
+*.pidb
+*.suo
+*.sln
+*.user
+*.unityproj
+*.booproj
+
+# ============ #
+# OS generated #
+# ============ #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+
+# ===================================== #
+# Unity3D generated meta files         #
+# ===================================== #
+# No ignoramos los .meta porque Unity los necesita
+
+# ======================== #
+# Builds                   #
+# ======================== #
+Builds/
+*.apk
+*.aab
+*.unitypackage
+*.app
+
+# ======================== #
+# Crashlytics              #
+# ======================== #
+crashlytics-build.properties
+
+# ======================== #
+# Logs                     #
+# ======================== #
+Logs/
+*.log
+
+# ======================== #
+# Plastic SCM              #
+# ======================== #
+*.private.0
+*.private
+
+# ======================== #
+# Packages lock            #
+# ======================== #
+# Mantenemos manifest.json pero ignoramos los locks privados
+
+# ======================== #
+# Python cache             #
+# ======================== #
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+.Python
+env/
+venv/
+.venv/
+
+# ======================== #
+# IDE                      #
+# ======================== #
+.idea/
+.vscode/
+*.code-workspace
+
+# ======================== #
+# Burst Debug Info         #
+# ======================== #
+*_BurstDebugInformation_DoNotShip/
+
+# ======================== #
+# Package Cache            #
+# ======================== #
+Library/PackageCache/
