@@ -1,4 +1,4 @@
-# CleanTheOcean 🌊🐟
+# CleanTheOcean
 
 Juego multijugador cooperativo/competitivo desarrollado en Unity donde dos jugadores compiten en tiempo real: uno limpia el océano mientras el otro lo contamina.
 
