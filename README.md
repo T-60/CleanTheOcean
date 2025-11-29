@@ -11,16 +11,24 @@ CleanTheOcean es un juego **multijugador para 2 jugadores** que usa **Photon PUN
 
 Las partidas duran 2 minutos y medio. Gana el jugador que cumpla mejor su objetivo.
 
-## Requisitos previos
+## Ejecutar el juego (forma rápida)
 
-Para abrir y compilar el proyecto necesitás:
+Si solo querés probar el juego sin compilar nada, descargá el ejecutable ya compilado:
 
-- **Unity Hub** (descargalo de https://unity.com/download)
-- **Unity 2021.3.45f1** (instalalo desde Unity Hub, es importante usar esta versión exacta)
-- **Python 3.10 o superior** (solo si vas a usar el control por gestos)
-- **Conexión a internet** (para el multijugador con Photon)
+📥 **[Descargar Build (Windows)](PONER_LINK_DE_DRIVE_ACÁ)**
 
-## Cómo abrir el proyecto
+Solo descomprimí el `.zip` y ejecutá `Proyecto.exe`. Necesitás dos computadoras o dos instancias del juego para el multijugador.
+
+## Requisitos previos (para compilar)
+
+Si querés abrir el proyecto en Unity y compilarlo vos mismo:
+
+- **Unity Hub** - descargalo de https://unity.com/download
+- **Unity 2021.3.45f1** - instalalo desde Unity Hub, es importante usar esta versión exacta
+- **Python 3.10 o superior** - solo si vas a usar el control por gestos
+- **Conexión a internet** - para el multijugador con Photon
+
+## Cómo abrir el proyecto en Unity
 
 1. Abrí **Unity Hub**
 2. Hacé clic en **"Open"** o **"Add"**
@@ -32,60 +40,74 @@ Para abrir y compilar el proyecto necesitás:
 
 ```
 CleanTheOcean/
+├── Build/                                 # Ejecutable compilado (Windows)
+│   └── Proyecto.exe                       # Ejecutar este archivo para jugar
 ├── Proyecto/                              # Proyecto de Unity
 │   ├── Assets/
-│   │   ├── ScriptsConexion/              # Scripts del juego (networking, movimiento, etc.)
+│   │   ├── ScriptsConexion/              # Scripts principales del juego
 │   │   │   ├── Launcher.cs               # Conexión a Photon y asignación de roles
-│   │   │   ├── GameMatchManager.cs       # Lógica de la partida, timer, puntuación
+│   │   │   ├── GameMatchManager.cs       # Lógica de partida, timer y puntuación
 │   │   │   ├── Movement.cs               # Control del jugador
-│   │   │   ├── TrashSpawner.cs           # Sistema de spawn de basura
-│   │   │   └── HandReceiver.cs           # Recibe datos de gestos desde Python
-│   │   ├── Ventuar/UnderwaterPack/
-│   │   │   └── Scenes/
-│   │   │       ├── Demo.unity            # ⭐ ESCENA PRINCIPAL DEL JUEGO
-│   │   │       └── MainMenu.unity        # Menú inicial
-│   │   ├── Photon/                       # Plugin de Photon PUN (networking)
-│   │   └── Audio/                        # Efectos de sonido y música
+│   │   │   ├── TrashSpawner.cs           # Sistema de basura
+│   │   │   ├── PhoneButtonReceiver.cs    # Recibe comandos del celular
+│   │   │   └── UDPMultiplayerAdapter.cs  # Comunicación UDP con Python
+│   │   ├── Ventuar/UnderwaterPack/Scenes/
+│   │   │   ├── Demo.unity                # ⭐ ESCENA PRINCIPAL DEL JUEGO
+│   │   │   └── MainMenu.unity            # Menú inicial
+│   │   └── Photon/                       # Plugin de red (Photon PUN 2)
 │   ├── Packages/
 │   └── ProjectSettings/
-├── hand_tracker.py                        # Detección de gestos con MediaPipe
-├── phone_server.py                        # Servidor para control desde celular
-├── phone_controller.html                  # Interfaz web para el celular
-├── config.py                              # Configuración del sistema de gestos
+├── movimiento.py                          # 🎮 Detección de gestos con la cámara
+├── phone_server.py                        # 📱 Servidor para control desde celular
+├── phone_controller.html                  # Interfaz del celular (con giroscopio)
+├── phone_buttons_controller.html          # Interfaz del celular (solo botones)
+├── config.py                              # Configuración de la cámara y gestos
 ├── requirements.txt                       # Dependencias de Python
-└── run_gesture_detection.bat              # Script para iniciar detección de gestos
+└── run_gesture_detection.bat              # Iniciar detección de gestos
 ```
 
-## Cómo compilar y ejecutar
+## Cómo compilar el juego
 
-1. Abrí el proyecto en Unity (como se explicó arriba)
-2. Abrí la escena principal: **Assets → Ventuar → UnderwaterPack → Scenes → Demo.unity**
-3. Para probar, dale **Play** en el editor (necesitás 2 instancias para el multijugador)
-4. Para compilar:
-   - Andá a **File → Build Settings**
-   - Asegurate de que **Demo** esté en la lista de escenas (si no está, hacé clic en "Add Open Scenes")
-   - Plataforma: **PC, Mac & Linux Standalone**
-   - Hacé clic en **Build** y elegí donde guardar el ejecutable
+1. Abrí el proyecto en Unity
+2. Abrí la escena: **Assets → Ventuar → UnderwaterPack → Scenes → Demo.unity**
+3. Andá a **File → Build Settings**
+4. Asegurate de que **Demo** esté en la lista de escenas
+5. Plataforma: **PC, Mac & Linux Standalone**
+6. Hacé clic en **Build** y elegí donde guardar
 
 ## Cómo jugar
 
 ### Inicio de partida
-1. Ejecutá el juego en dos computadoras (o dos instancias)
-2. El primer jugador que entre será el **Limpiador**
-3. El segundo jugador será el **Contaminador**
-4. Cuando los dos estén conectados, presioná **2** para iniciar la partida
+
+1. Ejecutá el juego en dos computadoras (o dos instancias en la misma PC)
+2. El primero que entre será el **Limpiador**
+3. El segundo será el **Contaminador**
+4. Cuando los dos estén conectados, presioná **2** para iniciar
 
 ### Controles del Limpiador (Jugador 1)
-- Usa los gestos de la mano frente a la cámara para mover el personaje
-- También podés usar el celular como control (abrí `phone_controller.html` en el navegador del celular)
+
+Podés usar gestos con la cámara o el celular:
+
+**Gestos con cámara:**
+- Mano derecha arriba → Rotar derecha
+- Mano izquierda arriba → Rotar izquierda
+- Ambas manos arriba → Avanzar
+- Manos juntas → Retroceder
+- Puño cerrado → Agarrar basura
+- Pulgar arriba → Iluminar basura cercana
+
+**Con celular:**
+- Usá el giroscopio para mirar
+- Botones en pantalla para moverte
 
 ### Controles del Contaminador (Jugador 2)
+
 - Vista desde arriba del océano
-- Click para tirar basura y contaminar
+- Click en el agua para tirar basura
 
 ## Sistema de control por gestos
 
-El Jugador 1 puede usar gestos de manos detectados con la cámara web:
+Para usar los gestos con la cámara web:
 
 1. Abrí una terminal en la carpeta del proyecto
 2. Instalá las dependencias:
@@ -94,35 +116,51 @@ El Jugador 1 puede usar gestos de manos detectados con la cámara web:
    ```
 3. Ejecutá el detector:
    ```
-   python hand_tracker.py
+   python movimiento.py
    ```
    O hacé doble clic en `run_gesture_detection.bat`
 
-4. Asegurate de que el juego esté corriendo antes de iniciar el detector
+El juego tiene que estar corriendo antes de iniciar el detector.
+
+## Control desde el celular
+
+1. Ejecutá el servidor:
+   ```
+   python phone_server.py
+   ```
+2. Te va a mostrar una URL tipo `http://192.168.x.x:8080`
+3. Abrí esa URL en el navegador del celular (tiene que estar en la misma red WiFi)
+4. Opciones:
+   - `/` → Control con giroscopio + botones
+   - `/buttons` → Solo botones (más simple)
 
 ## Tecnologías usadas
 
 - **Unity 2021.3.45f1** - Motor del juego
 - **Photon PUN 2** - Multijugador en tiempo real
 - **Python + MediaPipe** - Detección de gestos con visión por computadora
-- **OpenCV** - Captura y procesamiento de video
-
-## Notas importantes
-
-- La primera vez que abrís el proyecto, Unity importa todo y puede tardar varios minutos
-- Si aparecen errores de paquetes, andá a **Window → Package Manager** y actualizalos
-- Para probar el multijugador en una sola PC, podés compilar el juego y correr una instancia compilada + otra en el editor
+- **OpenCV** - Captura de video
+- **WebSockets/UDP** - Comunicación entre Python y Unity
 
 ## Problemas comunes
 
-**"Script not found" o errores de compilación:**
-Cerrá Unity, borrá la carpeta `Library` dentro de `Proyecto/` y volvé a abrir.
+**Unity no abre el proyecto:**
+Asegurate de tener instalada la versión exacta 2021.3.45f1
+
+**Errores de scripts:**
+Cerrá Unity, borrá la carpeta `Library` dentro de `Proyecto/` y volvé a abrir
 
 **No conecta al multijugador:**
-Verificá tu conexión a internet. Photon necesita conectarse a sus servidores.
+Verificá tu conexión a internet. Photon necesita conectarse a sus servidores
 
-**Los gestos no funcionan:**
-Asegurate de que la cámara esté funcionando y que Python tenga las librerías instaladas.
+**La cámara no detecta gestos:**
+- Verificá que la cámara funcione
+- Fijate que Python tenga las librerías instaladas (`pip install -r requirements.txt`)
+- Revisá que el índice de cámara sea correcto en `config.py`
+
+**El celular no se conecta:**
+- El celular y la PC tienen que estar en la misma red WiFi
+- Fijate que el firewall no bloquee el puerto 8080
 
 ---
 
